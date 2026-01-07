@@ -37,7 +37,7 @@ function addMessage(sender, text) {
 // ⚙️ функция за заявка към твоя сървър
 async function getAIResponse(prompt) {
   try {
-    const response = await fetch("http://localhost:3000/api/chat", {
+    const response = await fetch("https://ai-chat-demo.onrender.com/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ inputs: prompt }),
@@ -68,4 +68,5 @@ userInput.addEventListener("keypress", async (e) => {
     e.preventDefault();
     sendBtn.click();
   }
+
 });
