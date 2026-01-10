@@ -124,7 +124,7 @@ button:hover {
   }
 
   .chat-container {
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
+    background: var(--bg-user);
   }
 
   textarea {
@@ -168,6 +168,7 @@ body.dark {
   --text-ai: #eee;
   --text-user: #fff;
 }
+
 
 
 
