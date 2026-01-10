@@ -1,17 +1,4 @@
-:root {
-  --bg-light: #ffffff;
-  --bg-chat: #ffffff;
-  --bg-user: #0055ff;
-  --bg-ai: #e5e5ea;
-  --text-ai: #333;
-  --text-user: #fff;
-  --bg-user-hover: #0056b3;
-  --input-bg: #f0f4ff;
-  --input-text: #000;
-  --input-border: #000;
-}
-
-body {
+:body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: var(--bg-light);
   margin: 0;
@@ -25,33 +12,22 @@ body {
 .chat-container {
   width: 90%;
   max-width: 600px;
-  background: var(--bg-chat);
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: all 0.3s ease;
-  height: 90vh;
 }
 
 #chat-log {
   flex: 1;
-  padding: 12px;
   overflow-y: auto;
-  background: var(--bg-light);
+  padding: 12px;
   display: flex;
   flex-direction: column;
 }
 
 textarea {
-  border: none;
-  border-top: 1px solid #ddd;
-  resize: none;
   height: 60px;
-  padding: 12px;
-  font-size: 15px;
-  outline: none;
 }
 
 button {
@@ -204,9 +180,9 @@ body.dark {
   --input-border: #fff;   /* граница при полето */
 }
 
-body.blue {
-  --bg-light: #4444ff;       /* фон на страницата */
-  --bg-chat: #000fff;        /* фон на чата */
+root {
+  --bg-light: #e7f0ff;       /* фон на страницата */
+  --bg-chat: #f9fbff;        /* фон на чата */
   --bg-user: #0055ff;        /* твоя балон */
   --bg-ai: #d0e0ff;          /* AI балон */
   --text-ai: #001f4d;        /* цвят на текста на AI */
@@ -214,7 +190,6 @@ body.blue {
   --bg-user-hover: #003cb3;  /* бутон hover */
   --input-bg: #f1f5ff;       /* поле за писане */
   --input-text: #002266;     /* текст в полето */
-  --input-border: #000;   /* граница при полето */
+  --input-border: #a5b7ff;   /* граница при полето */
 }
-
 
