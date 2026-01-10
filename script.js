@@ -9,7 +9,6 @@ sendBtn.addEventListener("click", async () => {
   addMessage("Ти", message);
   userInput.value = "";
 
-  // 🧠 получаваме отговор от сървъра
   const reply = await getAIResponse(message);
   addMessage("AI", reply);
 });
@@ -34,10 +33,16 @@ function addMessage(sender, text) {
   chatLog.scrollTop = chatLog.scrollHeight;
 }
 
-// ⚙️ функция за заявка към твоя сървър
+// 🌐 Автоматично избира правилния сървър
+const API_BASE =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://ai-chat-demo.onrender.com"; // <-- сложи твоя реален Render адрес
+
+// 🧠 Изпращане към AI API през нашия сървър
 async function getAIResponse(prompt) {
   try {
-    const response = await fetch("https://ai-chat-demo.onrender.com/api/chat", {
+    const response = await fetch(`${API_BASE}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ inputs: prompt }),
@@ -62,11 +67,10 @@ async function getAIResponse(prompt) {
   }
 }
 
-// ➕ по желание – да можеш да изпращаш и с Enter
+// ➕ опция – изпращане с Enter
 userInput.addEventListener("keypress", async (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendBtn.click();
   }
-
 });
