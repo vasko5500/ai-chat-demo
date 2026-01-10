@@ -6,6 +6,9 @@
   --text-ai: #333;
   --text-user: #fff;
   --bg-user-hover: #0056b3;
+  --input-bg: #f0f4ff;
+  --input-text: #000;
+  --input-border: #ddd;
 }
 
 body {
@@ -139,6 +142,7 @@ body.dark {
   --text-user: #fff;
   --bg-user-hover: #0050a3;
 }
+
 
 
 
