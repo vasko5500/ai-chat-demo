@@ -82,3 +82,8 @@ themeToggle.addEventListener("click", () => {
 });
 
 document.getElementById('theme-toggle');
+
+console.log("✅ script.js е зареден");
+
+
+
