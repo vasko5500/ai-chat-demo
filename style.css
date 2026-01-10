@@ -78,6 +78,54 @@ button:active {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.theme-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.theme-buttons button {
+  border: none;
+  font-weight: 500;
+  font-size: 15px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 🌞 Светла – оранжево-жълт градиент */
+#light-btn {
+  background: linear-gradient(135deg, #ffcc33, #ff9933);
+  box-shadow: 0 4px 12px rgba(255, 153, 51, 0.4);
+}
+
+/* 🌙 Тъмна – синьо-виолетов */
+#dark-btn {
+  background: linear-gradient(135deg, #0056b3, #001f66);
+  box-shadow: 0 4px 12px rgba(0, 31, 102, 0.4);
+}
+
+/* 💙 Синя – светло син градиент */
+#blue-btn {
+  background: linear-gradient(135deg, #00aaff, #0066ff);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.4);
+}
+
+/* Ефект при hover (яркост + леко вдигане) */
+.theme-buttons button:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+/* Ефект при клик */
+.theme-buttons button:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
 .message {
   display: flex;
   margin-bottom: 12px;
@@ -166,6 +214,7 @@ body.blue {
   --input-text: #002266;     /* текст в полето */
   --input-border: #a5b7ff;   /* граница при полето */
 }
+
 
 
 
