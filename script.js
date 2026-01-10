@@ -37,7 +37,7 @@ function addMessage(sender, text) {
 const API_BASE =
   window.location.hostname === "localhost"
     ? "http://localhost:3000"
-    : "https://ai-chat-demo.onrender.com"; // <-- сложи твоя реален Render адрес
+    : "https://ai-chat-demo-v31a.onrender.com"; // <-- сложи твоя реален Render адрес
 
 // 🧠 Изпращане към AI API през нашия сървър
 async function getAIResponse(prompt) {
@@ -74,3 +74,4 @@ userInput.addEventListener("keypress", async (e) => {
     sendBtn.click();
   }
 });
+
