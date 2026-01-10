@@ -10,6 +10,7 @@
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: var(--bg-light);
+  background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
   margin: 0;
   height: 100vh;
   display: flex;
@@ -156,8 +157,4 @@ button:hover {
 #chat-log::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-}
-
-textarea:focus {
-  background-color: #f9fafb;
 }
