@@ -80,11 +80,24 @@ document.getElementById('theme-toggle');
 console.log("✅ script.js е зареден");
 
 window.addEventListener("DOMContentLoaded", () => {
-  const themeToggle = document.getElementById("theme-toggle");
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    console.log("🌓 Натиснат бутон! Клас 'dark':", document.body.classList.contains("dark"));
+  const buttons = {
+    light: document.getElementById("light-btn"),
+    dark: document.getElementById("dark-btn"),
+    blue: document.getElementById("blue-btn"),
+  };
+
+  function applyTheme(theme) {
+    document.body.classList.remove("dark", "blue");
+    if (theme !== "light") document.body.classList.add(theme);
+    localStorage.setItem("selectedTheme", theme);
+  }
+
+  // връщане на запомнената тема
+  const saved = localStorage.getItem("selectedTheme");
+  if (saved) applyTheme(saved);
+
+  // свързваме бутоните
+  Object.keys(buttons).forEach((key) => {
+    buttons[key].addEventListener("click", () => applyTheme(key));
   });
 });
-
-
