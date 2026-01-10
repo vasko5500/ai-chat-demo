@@ -75,15 +75,16 @@ userInput.addEventListener("keypress", async (e) => {
   }
 });
 
-const themeToggle = document.getElementById("theme-toggle");
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-});
-
 document.getElementById('theme-toggle');
 
 console.log("✅ script.js е зареден");
 
+window.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    console.log("🌓 Натиснат бутон! Клас 'dark':", document.body.classList.contains("dark"));
+  });
+});
 
 
