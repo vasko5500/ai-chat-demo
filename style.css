@@ -1,52 +1,75 @@
+:root {
+  --bg-light: #f5f7fb;
+  --bg-chat: #ffffff;
+  --bg-user: #007bff;
+  --bg-ai: #e5e5ea;
+  --text-ai: #333;
+  --text-user: #fff;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: var(--bg-light);
+  margin: 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .chat-container {
-  background: white;
-  padding: 20px;
-  width: 400px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 420px;
+  max-width: 90%;
+  background: var(--bg-chat);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 #chat-log {
-  height: 300px;
+  flex: 1;
+  padding: 12px;
   overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
+  background: var(--bg-light);
+  display: flex;
+  flex-direction: column;
 }
 
 textarea {
-  width: 100%;
-  height: 60px;
-  margin-bottom: 10px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background: #007bff;
-  color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-top: 1px solid #ddd;
+  resize: none;
+  height: 60px;
+  padding: 12px;
+  font-size: 15px;
+  outline: none;
 }
-
+button {
+  border: none;
+  background: var(--bg-user);
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 button:hover {
   background: #0056b3;
 }
 
-/* Стилове за съобщенията */
 .message {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+.message.ai {
+  justify-content: flex-start;
 }
 
 .user {
@@ -57,26 +80,72 @@ button:hover {
   justify-content: flex-start;
 }
 
-/* Балонче със заоблени ръбове */
 .bubble {
-  max-width: 75%;
   padding: 10px 14px;
-  border-radius: 12px;
-  line-height: 1.4em;
+  border-radius: 14px;
   font-size: 15px;
+  line-height: 1.4;
+  max-width: 75%;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   white-space: pre-wrap;
+  transition: transform 0.2s ease;
 }
 
-/* Балон на потребителя */
 .user .bubble {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--bg-user);
+  color: var(--text-user);
   border-bottom-right-radius: 0;
 }
 
-/* Балон на AI */
 .ai .bubble {
-  background-color: #e5e5ea;
-  color: #333;
+  background-color: var(--bg-ai);
+  color: var(--text-ai);
   border-bottom-left-radius: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-light: #1e1e1e;
+    --bg-chat: #2c2c2c;
+    --bg-user: #0078ff;
+    --bg-ai: #3a3a3a;
+    --text-ai: #eee;
+    --text-user: #fff;
+  }
+
+  body {
+    background-color: var(--bg-chat);
+  }
+
+  #chat-log {
+    background-color: var(--bg-chat);
+  }
+
+  .chat-container {
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
+  }
+
+  textarea {
+    background: #3a3a3a;
+    color: #eee;
+  }
+
+  button {
+    background: var(--bg-user);
+  }
+}
+
+.bubble {
+  animation: pop-in 0.2s ease;
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
