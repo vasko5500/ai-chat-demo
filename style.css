@@ -22,8 +22,8 @@ body {
 .chat-container {
   width: 420px;
   max-width: 90%;
-  background: #ecffff
-  background: linear-gradient(135deg, #f0f4ff, #cce0ff);
+background: #f0f4ff;    /* много светло синьо */
+background: linear-gradient(135deg, #f0f4ff, #cce0ff); /* градиент */
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -161,6 +161,7 @@ button:hover {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
+
 
 
 
