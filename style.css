@@ -149,3 +149,15 @@ button:hover {
     opacity: 1;
   }
 }
+
+#chat-log::-webkit-scrollbar {
+  width: 6px;
+}
+#chat-log::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+textarea:focus {
+  background-color: #f9fafb;
+}
