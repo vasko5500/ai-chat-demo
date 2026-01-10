@@ -1,4 +1,17 @@
-:body {
+:root {
+  --bg-light: #e7f0ff;       /* фон на страницата */
+  --bg-chat: #f9fbff;        /* фон на чата */
+  --bg-user: #0055ff;        /* твоя балон */
+  --bg-ai: #d0e0ff;          /* AI балон */
+  --text-ai: #001f4d;        /* цвят на текста на AI */
+  --text-user: #ffffff;      /* цвят на текста на теб */
+  --bg-user-hover: #003cb3;  /* бутон hover */
+  --input-bg: #f1f5ff;       /* поле за писане */
+  --input-text: #002266;     /* текст в полето */
+  --input-border: #a5b7ff;   /* граница при полето */
+}
+
+body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: var(--bg-light);
   margin: 0;
@@ -83,12 +96,6 @@ button:active {
   box-shadow: 0 4px 12px rgba(0, 31, 102, 0.4);
 }
 
-/* 💙 Синя – светло син градиент */
-#blue-btn {
-  background: linear-gradient(135deg, #00aaff, #0066ff);
-  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.4);
-}
-
 /* Ефект при hover (яркост + леко вдигане) */
 .theme-buttons button:hover {
   transform: translateY(-3px);
@@ -167,19 +174,6 @@ button:active {
   border-radius: 3px;
 }
 
-root.light {
-  --bg-light: #e7f0ff;       /* фон на страницата */
-  --bg-chat: #f9fbff;        /* фон на чата */
-  --bg-user: #0055ff;        /* твоя балон */
-  --bg-ai: #d0e0ff;          /* AI балон */
-  --text-ai: #001f4d;        /* цвят на текста на AI */
-  --text-user: #ffffff;      /* цвят на текста на теб */
-  --bg-user-hover: #003cb3;  /* бутон hover */
-  --input-bg: #f1f5ff;       /* поле за писане */
-  --input-text: #002266;     /* текст в полето */
-  --input-border: #a5b7ff;   /* граница при полето */
-}
-
 body.dark {
   --bg-light: #000;
   --bg-chat: #000;
@@ -192,6 +186,7 @@ body.dark {
   --input-text: #fff;
   --input-border: #fff;
 }
+
 
 
 
