@@ -143,6 +143,18 @@ body.dark {
   --bg-user-hover: #0050a3;
 }
 
+body.blue {
+  --bg-light: #e7f0ff;       /* фон на страницата */
+  --bg-chat: #f9fbff;        /* фон на чата */
+  --bg-user: #0055ff;        /* твоя балон */
+  --bg-ai: #d0e0ff;          /* AI балон */
+  --text-ai: #001f4d;        /* цвят на текста на AI */
+  --text-user: #ffffff;      /* цвят на текста на теб */
+  --bg-user-hover: #003cb3;  /* бутон hover */
+  --input-bg: #f1f5ff;       /* поле за писане */
+  --input-text: #002266;     /* текст в полето */
+  --input-border: #a5b7ff;   /* граница при полето */
+}
 
 
 
