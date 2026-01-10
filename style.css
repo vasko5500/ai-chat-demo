@@ -25,22 +25,33 @@ body {
 .chat-container {
   width: 90%;
   max-width: 600px;
-  height: 95vh;
+  background: var(--bg-chat);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100vh;
 }
 
 #chat-log {
   flex: 1;
-  overflow-y: auto;
   padding: 12px;
+  overflow-y: auto;
+  background: var(--bg-light);
   display: flex;
   flex-direction: column;
 }
 
 textarea {
+  border: none;
+  border-top: 1px solid #ddd;
+  resize: none;
   height: 60px;
+  padding: 12px;
+  font-size: 15px;
+  outline: none;
 }
 
 button {
@@ -87,21 +98,12 @@ button:active {
 
 #light-btn {
   background: linear-gradient(135deg, #00aaff, #0066ff);
-  color: #ffffff;
-  border: none;
-  border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 102, 255, 0.4);
-  padding: 10px 22px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.3s ease;
 }
 
 #light-btn:hover {
   filter: brightness(1.15); /* леко "светене" */
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.45);
 }
 
 #light-btn:active {
@@ -111,16 +113,6 @@ button:active {
 
 #dark-btn {
   background: #000000;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
-}
-
-#dark-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
 
 /* Ефект при hover (яркост + леко вдигане) */
