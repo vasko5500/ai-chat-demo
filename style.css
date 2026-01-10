@@ -10,7 +10,7 @@
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: var(--bg-light);
-  background: linear-gradient(135deg, #ece9e6 0%, #80afff 100%);
+  background: linear-gradient(135deg, #ecffff 0%, #80afff 100%);
   margin: 0;
   height: 100vh;
   display: flex;
@@ -29,6 +29,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   transition: all 0.3s ease;
+  height: 90vh;
 }
 
 #chat-log {
@@ -159,3 +160,4 @@ button:hover {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
+
