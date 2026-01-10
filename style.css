@@ -45,8 +45,9 @@ body {
 }
 
 textarea {
-  border: none;
-  border-top: 1px solid #ddd;
+  background-color: var(--input-bg);  /* фон */
+  color: var(--input-text);           /* цвят на текста */
+  border-top: 1px solid var(--input-border);
   resize: none;
   height: 60px;
   padding: 12px;
@@ -205,6 +206,7 @@ body.dark {
   --input-text: #fff;
   --input-border: #fff;
 }
+
 
 
 
