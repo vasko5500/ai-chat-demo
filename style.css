@@ -9,7 +9,6 @@
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: #80afff;
   background: linear-gradient(135deg, #ffffff 0%, #ecffff 100%);
   margin: 0;
   height: 100vh;
@@ -20,7 +19,7 @@ body {
 }
 
 .chat-container {
-  max-width: 90%;
+  width: 75%;
   background: #ecffff
   background: linear-gradient(135deg, #f0f4ff, #cce0ff);
   border-radius: 16px;
