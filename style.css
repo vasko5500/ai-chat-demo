@@ -22,7 +22,6 @@ body {
   width: 90%;
   max-width: 600px;
   background: #000088;
-  background: linear-gradient(135deg, #11ff00, #660000);
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -159,6 +158,15 @@ button:hover {
 #chat-log::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
+}
+
+body.dark {
+  --bg-light: #1e1e1e;
+  --bg-chat: #2c2c2c;
+  --bg-user: #0078ff;
+  --bg-ai: #3a3a3a;
+  --text-ai: #eee;
+  --text-user: #fff;
 }
 
 
