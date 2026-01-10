@@ -1,7 +1,6 @@
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -59,5 +58,6 @@ app.use(express.static(__dirname));
 app.listen(3000, () =>
   console.log("✅ Server running at http://localhost:3000")
 );
+
 
 console.log("hf_wQfPSrz:", HF_API_KEY.slice(0, 10));
