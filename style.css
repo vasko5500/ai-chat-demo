@@ -167,20 +167,7 @@ button:active {
   border-radius: 3px;
 }
 
-body.dark {
-  --bg-light: #000;
-  --bg-chat: #000;
-  --bg-user: #0055ff;
-  --bg-ai: #3a3a3a;
-  --text-ai: #fff;
-  --text-user: #fff;
-  --bg-user-hover: #003cb3;
-  --input-bg: #000;       /* поле за писане */
-  --input-text: #fff;     /* текст в полето */
-  --input-border: #fff;   /* граница при полето */
-}
-
-root {
+root.light {
   --bg-light: #e7f0ff;       /* фон на страницата */
   --bg-chat: #f9fbff;        /* фон на чата */
   --bg-user: #0055ff;        /* твоя балон */
@@ -192,4 +179,19 @@ root {
   --input-text: #002266;     /* текст в полето */
   --input-border: #a5b7ff;   /* граница при полето */
 }
+
+body.dark {
+  --bg-light: #000;
+  --bg-chat: #000;
+  --bg-user: #0055ff;
+  --bg-ai: #3a3a3a;
+  --text-ai: #fff;
+  --text-user: #fff;
+  --bg-user-hover: #003cb3;
+  --input-bg: #000;
+  --input-text: #fff;
+  --input-border: #fff;
+}
+
+
 
