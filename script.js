@@ -75,3 +75,8 @@ userInput.addEventListener("keypress", async (e) => {
   }
 });
 
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
