@@ -25,7 +25,7 @@ body {
 .chat-container {
   width: 90%;
   max-width: 600px;
-  height: 90vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -85,15 +85,42 @@ button:active {
   transition: all 0.3s ease;
 }
 
-/* 🌞 Светла – оранжево-жълт градиент */
 #light-btn {
-  background: linear-gradient(135deg, #ffcc33, #ff9933);
-  box-shadow: 0 4px 12px rgba(255, 153, 51, 0.4);
+  background: linear-gradient(135deg, #00aaff, #0066ff);
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.4);
+  padding: 10px 22px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#light-btn:hover {
+  filter: brightness(1.15); /* леко "светене" */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.45);
+}
+
+#light-btn:active {
+  filter: brightness(0.95);
+  transform: translateY(0);
 }
 
 #dark-btn {
-  background: #000000
-  box-shadow: 0 4px 12px rgba(0, 31, 102, 0.4);
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+#dark-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
 
 /* Ефект при hover (яркост + леко вдигане) */
@@ -186,6 +213,7 @@ body.dark {
   --input-text: #fff;
   --input-border: #fff;
 }
+
 
 
 
