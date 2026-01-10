@@ -5,11 +5,12 @@
   --bg-ai: #e5e5ea;
   --text-ai: #333;
   --text-user: #fff;
+  --bg-user-hover: #0056b3;
 }
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #ffffff 0%, #000000 100%);
+  background: var(--bg-light);
   margin: 0;
   height: 100vh;
   display: flex;
@@ -21,7 +22,7 @@ body {
 .chat-container {
   width: 90%;
   max-width: 600px;
-  background: #000088;
+  background: var(--bg-chat);
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -58,8 +59,9 @@ button {
   cursor: pointer;
   transition: background 0.3s;
 }
+
 button:hover {
-  background: #0056b3;
+  background: var(--bg-user-hover);
 }
 
 .message {
@@ -104,3 +106,71 @@ button:hover {
   color: var(--text-ai);
   border-bottom-left-radius: 0;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-light: #1e1e1e;
+    --bg-chat: #2c2c2c;
+    --bg-user: #0078ff;
+    --bg-ai: #3a3a3a;
+    --text-ai: #eee;
+    --text-user: #fff;
+  }
+
+  body {
+    background-color: var(--bg-chat);
+  }
+
+  #chat-log {
+    background-color: var(--bg-chat);
+  }
+
+  .chat-container {
+    background: var(--bg-user);
+  }
+
+  textarea {
+    background: #3a3a3a;
+    color: #eee;
+  }
+
+  button {
+    background: var(--bg-user);
+  }
+}
+
+.bubble {
+  animation: pop-in 0.2s ease;
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#chat-log::-webkit-scrollbar {
+  width: 6px;
+}
+#chat-log::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+body.dark {
+  --bg-light: #1e1e1e;
+  --bg-chat: #2c2c2c;
+  --bg-user: #0078ff;
+  --bg-ai: #3a3a3a;
+  --text-ai: #eee;
+  --text-user: #fff;
+  --bg-user-hover: #0050a3;
+}
+
+
+
