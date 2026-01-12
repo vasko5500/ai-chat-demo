@@ -3,38 +3,19 @@ const sendBtn = document.getElementById("send-btn");
 const userInput = document.getElementById("user-input");
 const chatLog = document.getElementById("chat-log");
 
-// ➤ при натискане на "Изпрати"
 sendBtn.addEventListener("click", async () => {
   const message = userInput.value.trim();
-  if (!message) return; // няма текст
-
-  // 🟦 1. Добавяме твоето съобщение
+  if (!message) return;
+  
+  // 🟦 Твоето съобщение
   addMessage("Ти", message);
   userInput.value = "";
 
-  // 🟩 2. Показваме “AI пише...”
-  const typingDiv = document.createElement("div");
-  typingDiv.classList.add("message", "ai");
-
-  const typingIndicator = document.createElement("div");
-  typingIndicator.classList.add("typing-indicator");
-  typingIndicator.innerHTML = `
-    <span class="typing-dot"></span>
-    <span class="typing-dot"></span>
-    <span class="typing-dot"></span>
-  `;
-  typingDiv.appendChild(typingIndicator);
-  chatLog.appendChild(typingDiv);
-  chatLog.scrollTop = chatLog.scrollHeight;
-
   try {
-    // 🧠 3. Взимаме отговор от AI
+    // 🧠 Взимаме отговор от AI
     const reply = await getAIResponse(message);
 
-    // 🧹 4. Премахваме "пише..." индикацията
-    typingDiv.remove();
-
-    // 🖋️ 5. Ефект „пише буква по буква“
+    // 🖋️ Показваме анимирано изписване (без “пише...” индикация)
     const messageDiv = document.createElement("div");
     const bubble = document.createElement("div");
     messageDiv.classList.add("message", "ai");
@@ -44,7 +25,7 @@ sendBtn.addEventListener("click", async () => {
     chatLog.scrollTop = chatLog.scrollHeight;
 
     let index = 0;
-    const speed = 6; // колкото по-малко, толкова по-бързо пише
+    const speed = 18;
 
     function type() {
       if (index < reply.length) {
@@ -53,13 +34,11 @@ sendBtn.addEventListener("click", async () => {
         chatLog.scrollTop = chatLog.scrollHeight;
         setTimeout(type, speed);
       } else {
-        // 💾 записваме съобщението след като приключи
         saveMessage("AI", reply);
       }
     }
     type();
   } catch (error) {
-    typingDiv.remove(); // махаме индикацията при грешка
     addMessage("AI", "⚠️ Възникна грешка при свързване с AI.");
     console.error("Грешка:", error);
   }
@@ -192,6 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
