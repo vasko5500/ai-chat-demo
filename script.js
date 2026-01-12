@@ -6,13 +6,13 @@ const chatLog = document.getElementById("chat-log");
 // ➤ при натискане на "Изпрати"
 sendBtn.addEventListener("click", async () => {
   const message = userInput.value.trim();
-  if (!message) return;
+  if (!message) return; // няма текст
 
-  // добавяме твоя текст и изчистваме полето
+  // 🟦 1. Добавяме твоето съобщение
   addMessage("Ти", message);
   userInput.value = "";
 
-  // 🧩 1. Добавяме "AI пише..."
+  // 🟩 2. Показваме “AI пише...”
   const typingDiv = document.createElement("div");
   typingDiv.classList.add("message", "ai");
 
@@ -27,64 +27,41 @@ sendBtn.addEventListener("click", async () => {
   chatLog.appendChild(typingDiv);
   chatLog.scrollTop = chatLog.scrollHeight;
 
-  // 🧠 2. Изчакваме отговор от AI
-  const reply = await getAIResponse(message);
+  try {
+    // 🧠 3. Взимаме отговор от AI
+    const reply = await getAIResponse(message);
 
-  // 🧹 3. Премахваме "пише..."
-  typingDiv.remove();
+    // 🧹 4. Премахваме "пише..." индикацията
+    typingDiv.remove();
 
-  // 🖋️ 4. Създаваме балон за изписване буква по буква
-  const messageDiv = document.createElement("div");
-  const bubble = document.createElement("div");
-  messageDiv.classList.add("message", "ai");
-  bubble.classList.add("bubble");
-  messageDiv.appendChild(bubble);
-  chatLog.appendChild(messageDiv);
-  chatLog.scrollTop = chatLog.scrollHeight;
+    // 🖋️ 5. Ефект „пише буква по буква“
+    const messageDiv = document.createElement("div");
+    const bubble = document.createElement("div");
+    messageDiv.classList.add("message", "ai");
+    bubble.classList.add("bubble");
+    messageDiv.appendChild(bubble);
+    chatLog.appendChild(messageDiv);
 
-  // ⌨️ 5. Анимация "печатаща машина"
-  let index = 0;
-  const speed = 18; // колкото по-малко, толкова по-бързо
-  function type() {
-    if (index < reply.length) {
-      bubble.textContent += reply.charAt(index);
-      index++;
-      chatLog.scrollTop = chatLog.scrollHeight;
-      setTimeout(type, speed);
-    } else {
-      // 💾 записваме съобщението след като е изписано напълно
-      saveMessage("AI", reply);
+    let index = 0;
+    const speed = 18; // по-малко = по-бързо
+    function type() {
+      if (index < reply.length) {
+        bubble.textContent += reply.charAt(index);
+        index++;
+        chatLog.scrollTop = chatLog.scrollHeight;
+        setTimeout(type, speed);
+      } else {
+        // 💾 записваме съобщението след като приключи
+        saveMessage("AI", reply);
+      }
     }
+    type();
+  } catch (error) {
+    typingDiv.remove();
+    addMessage("AI", "⚠️ Възникна грешка при свързване с AI.");
+    console.error("Грешка:", error);
   }
-  type();
 });
-
-type();
-  
-// 🧩 Показваме, че AI "пише..."
-const typingDiv = document.createElement("div");
-typingDiv.classList.add("message", "ai");
-
-const typingIndicator = document.createElement("div");
-typingIndicator.classList.add("typing-indicator");
-typingIndicator.innerHTML = `
-  <span class="typing-dot"></span>
-  <span class="typing-dot"></span>
-  <span class="typing-dot"></span>
-`;
-
-typingDiv.appendChild(typingIndicator);
-chatLog.appendChild(typingDiv);
-chatLog.scrollTop = chatLog.scrollHeight;
-
-// 🧠 Изчакваме отговора
-const reply = await getAIResponse(message);
-
-// 🧹 Премахваме "пише..."
-typingDiv.remove();
-
-// 🗨️ Добавяме реалния отговор
-addMessage("AI", reply);
 
 // ➤ добавяне на съобщение в чата
 function addMessage(sender, text) {
@@ -213,5 +190,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
