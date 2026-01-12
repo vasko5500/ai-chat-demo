@@ -25,7 +25,7 @@ sendBtn.addEventListener("click", async () => {
     chatLog.scrollTop = chatLog.scrollHeight;
 
     let index = 0;
-    const speed = 18;
+    const speed = 3;
 
     function type() {
       if (index < reply.length) {
@@ -171,6 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
