@@ -1,63 +1,75 @@
-import express from "express";
-import fetch from "node-fetch";
-import cors from "cors";
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// новият Router API
-const HF_URL = "https://router.huggingface.co/v1/chat/completions";
-const HF_API_KEY = process.env.HF_API_KEY;
-
 app.post("/api/chat", async (req, res) => {
-  const prompt = req.body.inputs;
-  console.log("📩 Получена заявка от клиента:", prompt);
+  const { inputs, model } = req.body;
+
+  console.log("🧠 Получена заявка от клиент:");
+  console.log("   👉 Модел:", model);
+  console.log("   👉 Въпрос:", inputs);
 
   try {
-    const response = await fetch(HF_URL, {
-      method: "POST",
-      headers: {
+    let apiUrl = "";
+    let headers = {};
+    let body = {};
+
+    // 🧩 1. Различни AI доставчици
+    if (model === "gpt-4" || model === "gpt-3.5-turbo") {
+      apiUrl = "https://api.openai.com/v1/chat/completions";
+      headers = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${HF_API_KEY}`,
-      },
-      // форматът, който Router очаква
-      body: JSON.stringify({
-        model: "meta-llama/Llama-3.2-1B-Instruct",
-        messages: [{ role: "user", content: prompt }],
-        max_tokens: 200,
-      }),
-    });
-
-    const raw = await response.text();
-    console.log("💬 Суров отговор:", raw);
-
-    let data;
-    try {
-      data = JSON.parse(raw);
-    } catch {
-      console.error("⚠️ Неуспешен JSON парсинг.");
-      return res.status(500).json({ error: "Invalid JSON from router" });
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      };
+      body = {
+        model: model,
+        messages: [{ role: "user", content: inputs }],
+      };
+    } else if (model === "claude") {
+      apiUrl = "https://api.anthropic.com/v1/messages";
+      headers = {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.ANTHROPIC_API_KEY,
+      };
+      body = {
+        model: "claude-3-5-sonnet-20241022",
+        messages: [{ role: "user", content: inputs }],
+        max_tokens: 500,
+      };
+    } else if (model === "gemini") {
+      apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${process.env.GOOGLE_API_KEY}`;
+      headers = { "Content-Type": "application/json" };
+      body = {
+        contents: [{ parts: [{ text: inputs }] }],
+      };
+    } else {
+      // ако моделът не е разпознат
+      return res.json({ error: "Неподдържан модел: " + model });
     }
 
-    res.json(data);
-  } catch (err) {
-    console.error("⚠️ Грешка при заявката към Router:", err);
-    res.status(500).json({ error: "Server error" });
+    // 📨 Изпращаме заявката към съответния API
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    // 🩵 Превеждаме резултата до simple формат за фронтенда
+    let replyText = "";
+
+    if (data.choices?.[0]?.message?.content) {
+      replyText = data.choices[0].message.content;
+    } else if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+      replyText = data.candidates[0].content.parts[0].text;
+    } else if (data.content) {
+      replyText = data.content;
+    } else {
+      replyText = "😕 Няма отговор от модела.";
+    }
+
+    return res.json({
+      choices: [{ message: { content: replyText } }],
+    });
+  } catch (error) {
+    console.error("❌ Error calling model:", error);
+    res.json({ error: "Проблем при свързване с модела." });
   }
 });
-
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// 🧱 Статични файлове (показва index.html, style.css, script.js)
-app.use(express.static(__dirname));
-
-app.listen(3000, () =>
-  console.log("✅ Server running at http://localhost:3000")
-);
-
-
-console.log("hf_wQfPSrz:", HF_API_KEY.slice(0, 10));
