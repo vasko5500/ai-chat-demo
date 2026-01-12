@@ -44,7 +44,7 @@ sendBtn.addEventListener("click", async () => {
     chatLog.scrollTop = chatLog.scrollHeight;
 
     let index = 0;
-    const speed = 12; // колкото по-малко, толкова по-бързо пише
+    const speed = 6; // колкото по-малко, толкова по-бързо пише
 
     function type() {
       if (index < reply.length) {
@@ -192,6 +192,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
