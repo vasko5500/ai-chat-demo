@@ -21,6 +21,30 @@ modelButtons.forEach((btn) => {
   });
 });
 
+// 🔘 Настройка на моделите
+let currentModel = localStorage.getItem("selectedModel") || "basic"; // по подразбиране Basic
+const modelButtons = document.querySelectorAll(".model-btn");
+
+// маркирай активния бутон при зареждане
+window.addEventListener("DOMContentLoaded", () => {
+  const activeBtn = document.querySelector(`[data-model="${currentModel}"]`);
+  if (activeBtn) activeBtn.classList.add("active-model");
+});
+
+// логика при натискане на бутон
+modelButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentModel = btn.dataset.model;
+    localStorage.setItem("selectedModel", currentModel);
+
+    // визуална промяна
+    modelButtons.forEach((b) => b.classList.remove("active-model"));
+    btn.classList.add("active-model");
+
+    console.log("✅ Моделът е сменен на:", currentModel);
+  });
+});
+
 sendBtn.addEventListener("click", async () => {
   const message = userInput.value.trim();
   if (!message) return;
@@ -134,7 +158,7 @@ async function getAIResponse(prompt) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         inputs: prompt,
-        model: currentModel, // 💡 добавяме избрания модел
+        model: currentModel, // 💡 тук е магията
       }),
     });
 
@@ -192,6 +216,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
