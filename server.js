@@ -17,7 +17,7 @@ const HF_URL = "https://router.huggingface.co/v1/chat/completions";
 
 // 📍 Gemini settings
 const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent";
+  "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-pro:generateContent";
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 app.post("/api/chat", async (req, res) => {
@@ -96,3 +96,4 @@ app.use(express.static(__dirname));
 app.listen(3000, () =>
   console.log("✅ Server running at http://localhost:3000")
 );
+
