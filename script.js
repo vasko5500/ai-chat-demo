@@ -10,10 +10,62 @@ sendBtn.addEventListener("click", async () => {
 
   addMessage("Ти", message);
   userInput.value = "";
+  
+  // 🧠 Изчакваме реалния отговор от AI
+const reply = await getAIResponse(message);
 
-  const reply = await getAIResponse(message);
-  addMessage("AI", reply);
-});
+// 🧹 Махаме индикацията "пише..."
+typingDiv.remove();
+
+// 🖋️ Добавяме празен балон за изписване на отговора
+const messageDiv = document.createElement("div");
+const bubble = document.createElement("div");
+
+messageDiv.classList.add("message", "ai");
+bubble.classList.add("bubble");
+messageDiv.appendChild(bubble);
+chatLog.appendChild(messageDiv);
+chatLog.scrollTop = chatLog.scrollHeight;
+
+// ⌨️ Ефект на "машинка" – изписва текста буква по буква
+let index = 0;
+const speed = 18; // колкото по-малко, толкова по-бързо
+
+function type() {
+  if (index < reply.length) {
+    bubble.textContent += reply.charAt(index);
+    index++;
+    chatLog.scrollTop = chatLog.scrollHeight;
+    setTimeout(type, speed);
+  }
+}
+
+type();
+  
+// 🧩 Показваме, че AI "пише..."
+const typingDiv = document.createElement("div");
+typingDiv.classList.add("message", "ai");
+
+const typingIndicator = document.createElement("div");
+typingIndicator.classList.add("typing-indicator");
+typingIndicator.innerHTML = `
+  <span class="typing-dot"></span>
+  <span class="typing-dot"></span>
+  <span class="typing-dot"></span>
+`;
+
+typingDiv.appendChild(typingIndicator);
+chatLog.appendChild(typingDiv);
+chatLog.scrollTop = chatLog.scrollHeight;
+
+// 🧠 Изчакваме отговора
+const reply = await getAIResponse(message);
+
+// 🧹 Премахваме "пише..."
+typingDiv.remove();
+
+// 🗨️ Добавяме реалния отговор
+addMessage("AI", reply);
 
 // ➤ добавяне на съобщение в чата
 function addMessage(sender, text) {
@@ -142,3 +194,4 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
