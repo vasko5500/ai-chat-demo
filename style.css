@@ -244,5 +244,29 @@ body.dark {
   100% { opacity: 0.2; transform: translateY(0); }
 }
 
+.model-buttons {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.model-btn {
+  background: #ddd;
+  border: none;
+  padding: 6px 10px;
+  margin: 3px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.model-btn:hover {
+  background: #cfcfcf;
+}
+
+.active-model {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
 
 
