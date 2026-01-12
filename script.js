@@ -3,6 +3,24 @@ const sendBtn = document.getElementById("send-btn");
 const userInput = document.getElementById("user-input");
 const chatLog = document.getElementById("chat-log");
 
+// 🔘 Текущ избран модел
+let currentModel = "gpt-4";
+
+// 🧭 Свързваме бутоните за модели
+const modelButtons = document.querySelectorAll(".model-btn");
+
+modelButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentModel = btn.dataset.model;
+
+    // визуално маркираме избрания бутон
+    modelButtons.forEach((b) => b.classList.remove("active-model"));
+    btn.classList.add("active-model");
+
+    console.log("✅ Избран модел:", currentModel);
+  });
+});
+
 sendBtn.addEventListener("click", async () => {
   const message = userInput.value.trim();
   if (!message) return;
@@ -114,7 +132,10 @@ async function getAIResponse(prompt) {
     const response = await fetch(`${API_BASE}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ inputs: prompt }),
+      body: JSON.stringify({
+        inputs: prompt,
+        model: currentModel, // 💡 добавяме избрания модел
+      }),
     });
 
     const data = await response.json();
@@ -171,6 +192,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
