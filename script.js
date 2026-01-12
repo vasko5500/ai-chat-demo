@@ -3,24 +3,6 @@ const sendBtn = document.getElementById("send-btn");
 const userInput = document.getElementById("user-input");
 const chatLog = document.getElementById("chat-log");
 
-// 🔘 Текущ избран модел
-let currentModel = "gpt-4";
-
-// 🧭 Свързваме бутоните за модели
-const modelButtons = document.querySelectorAll(".model-btn");
-
-modelButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    currentModel = btn.dataset.model;
-
-    // визуално маркираме избрания бутон
-    modelButtons.forEach((b) => b.classList.remove("active-model"));
-    btn.classList.add("active-model");
-
-    console.log("✅ Избран модел:", currentModel);
-  });
-});
-
 // 🔘 Настройка на моделите
 let currentModel = localStorage.getItem("selectedModel") || "basic"; // по подразбиране Basic
 const modelButtons = document.querySelectorAll(".model-btn");
@@ -216,6 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
