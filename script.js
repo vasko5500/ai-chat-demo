@@ -8,37 +8,56 @@ sendBtn.addEventListener("click", async () => {
   const message = userInput.value.trim();
   if (!message) return;
 
+  // добавяме твоя текст и изчистваме полето
   addMessage("Ти", message);
   userInput.value = "";
-  
-  // 🧠 Изчакваме реалния отговор от AI
-const reply = await getAIResponse(message);
 
-// 🧹 Махаме индикацията "пише..."
-typingDiv.remove();
+  // 🧩 1. Добавяме "AI пише..."
+  const typingDiv = document.createElement("div");
+  typingDiv.classList.add("message", "ai");
 
-// 🖋️ Добавяме празен балон за изписване на отговора
-const messageDiv = document.createElement("div");
-const bubble = document.createElement("div");
+  const typingIndicator = document.createElement("div");
+  typingIndicator.classList.add("typing-indicator");
+  typingIndicator.innerHTML = `
+    <span class="typing-dot"></span>
+    <span class="typing-dot"></span>
+    <span class="typing-dot"></span>
+  `;
+  typingDiv.appendChild(typingIndicator);
+  chatLog.appendChild(typingDiv);
+  chatLog.scrollTop = chatLog.scrollHeight;
 
-messageDiv.classList.add("message", "ai");
-bubble.classList.add("bubble");
-messageDiv.appendChild(bubble);
-chatLog.appendChild(messageDiv);
-chatLog.scrollTop = chatLog.scrollHeight;
+  // 🧠 2. Изчакваме отговор от AI
+  const reply = await getAIResponse(message);
 
-// ⌨️ Ефект на "машинка" – изписва текста буква по буква
-let index = 0;
-const speed = 18; // колкото по-малко, толкова по-бързо
+  // 🧹 3. Премахваме "пише..."
+  typingDiv.remove();
 
-function type() {
-  if (index < reply.length) {
-    bubble.textContent += reply.charAt(index);
-    index++;
-    chatLog.scrollTop = chatLog.scrollHeight;
-    setTimeout(type, speed);
+  // 🖋️ 4. Създаваме балон за изписване буква по буква
+  const messageDiv = document.createElement("div");
+  const bubble = document.createElement("div");
+  messageDiv.classList.add("message", "ai");
+  bubble.classList.add("bubble");
+  messageDiv.appendChild(bubble);
+  chatLog.appendChild(messageDiv);
+  chatLog.scrollTop = chatLog.scrollHeight;
+
+  // ⌨️ 5. Анимация "печатаща машина"
+  let index = 0;
+  const speed = 18; // колкото по-малко, толкова по-бързо
+  function type() {
+    if (index < reply.length) {
+      bubble.textContent += reply.charAt(index);
+      index++;
+      chatLog.scrollTop = chatLog.scrollHeight;
+      setTimeout(type, speed);
+    } else {
+      // 💾 записваме съобщението след като е изписано напълно
+      saveMessage("AI", reply);
+    }
   }
-}
+  type();
+});
 
 type();
   
@@ -194,4 +213,5 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
