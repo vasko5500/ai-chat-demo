@@ -11,7 +11,22 @@ sendBtn.addEventListener("click", async () => {
   // 🟦 1. Добавяме твоето съобщение
   addMessage("Ти", message);
   userInput.value = "";
-  
+
+  // 🟩 2. Показваме “AI пише...”
+  const typingDiv = document.createElement("div");
+  typingDiv.classList.add("message", "ai");
+
+  const typingIndicator = document.createElement("div");
+  typingIndicator.classList.add("typing-indicator");
+  typingIndicator.innerHTML = `
+    <span class="typing-dot"></span>
+    <span class="typing-dot"></span>
+    <span class="typing-dot"></span>
+  `;
+  typingDiv.appendChild(typingIndicator);
+  chatLog.appendChild(typingDiv);
+  chatLog.scrollTop = chatLog.scrollHeight;
+
   try {
     // 🧠 3. Взимаме отговор от AI
     const reply = await getAIResponse(message);
@@ -26,9 +41,11 @@ sendBtn.addEventListener("click", async () => {
     bubble.classList.add("bubble");
     messageDiv.appendChild(bubble);
     chatLog.appendChild(messageDiv);
+    chatLog.scrollTop = chatLog.scrollHeight;
 
     let index = 0;
-    const speed = 12; // по-малко = по-бързо
+    const speed = 12; // колкото по-малко, толкова по-бързо пише
+
     function type() {
       if (index < reply.length) {
         bubble.textContent += reply.charAt(index);
@@ -42,7 +59,7 @@ sendBtn.addEventListener("click", async () => {
     }
     type();
   } catch (error) {
-    typingDiv.remove();
+    typingDiv.remove(); // махаме индикацията при грешка
     addMessage("AI", "⚠️ Възникна грешка при свързване с AI.");
     console.error("Грешка:", error);
   }
@@ -175,6 +192,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
