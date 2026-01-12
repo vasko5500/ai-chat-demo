@@ -11,28 +11,19 @@ app.post("/api/chat", async (req, res) => {
     let body = {};
 
     // 🧩 1. Различни AI доставчици
-    if (model === "gpt-4" || model === "gpt-3.5-turbo") {
-      apiUrl = "https://api.openai.com/v1/chat/completions";
+    if (model === "Basic" || model === "process.env.HF_API_KEY") {
+      apiUrl = "https://router.huggingface.co/v1/chat/completions";
       headers = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${process.env.HF_API_KEY}`,
       };
-      body = {
-        model: model,
-        messages: [{ role: "user", content: inputs }],
-      };
-    } else if (model === "claude") {
-      apiUrl = "https://api.anthropic.com/v1/messages";
-      headers = {
-        "Content-Type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY,
-      };
+
       body = {
         model: "claude-3-5-sonnet-20241022",
         messages: [{ role: "user", content: inputs }],
         max_tokens: 500,
       };
-    } else if (model === "gemini") {
+    } else if (model === "Gemini") {
       apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${process.env.GOOGLE_API_KEY}`;
       headers = { "Content-Type": "application/json" };
       body = {
@@ -73,3 +64,4 @@ app.post("/api/chat", async (req, res) => {
     res.json({ error: "Проблем при свързване с модела." });
   }
 });
+
