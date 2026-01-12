@@ -11,22 +11,7 @@ sendBtn.addEventListener("click", async () => {
   // 🟦 1. Добавяме твоето съобщение
   addMessage("Ти", message);
   userInput.value = "";
-
-  // 🟩 2. Показваме “AI пише...”
-  const typingDiv = document.createElement("div");
-  typingDiv.classList.add("message", "ai");
-
-  const typingIndicator = document.createElement("div");
-  typingIndicator.classList.add("typing-indicator");
-  typingIndicator.innerHTML = `
-    <span class="typing-dot"></span>
-    <span class="typing-dot"></span>
-    <span class="typing-dot"></span>
-  `;
-  typingDiv.appendChild(typingIndicator);
-  chatLog.appendChild(typingDiv);
-  chatLog.scrollTop = chatLog.scrollHeight;
-
+  
   try {
     // 🧠 3. Взимаме отговор от AI
     const reply = await getAIResponse(message);
@@ -43,7 +28,7 @@ sendBtn.addEventListener("click", async () => {
     chatLog.appendChild(messageDiv);
 
     let index = 0;
-    const speed = 18; // по-малко = по-бързо
+    const speed = 12; // по-малко = по-бързо
     function type() {
       if (index < reply.length) {
         bubble.textContent += reply.charAt(index);
@@ -190,6 +175,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
